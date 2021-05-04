@@ -18,6 +18,16 @@ class State:
 
         self.behavior_state = BehaviorState.REST
 
+    def printBehaviorState(self):
+        if self.behavior_state == BehaviorState.REST:
+            print("Robot in REST mode")
+        elif self.behavior_state == BehaviorState.TROT:
+            print("Robot in TROT mode")
+        elif self.behavior_state == BehaviorState.HOP:
+            print("Robot in HOP mode")
+        else:
+            print("Robot in DEACTIVATED mode")
+
 
 class BehaviorState(Enum):
     DEACTIVATED = -1
