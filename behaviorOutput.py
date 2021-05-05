@@ -1,10 +1,9 @@
+import BehaviorLibrary as Behavior
 
 
+def behaviorPool():
 
-## TODO: Create message funktions
+    while True:
+        
 
-def activate():
-    """ Returns a single-item dictionary containing a key : value pair, 
-        used to create a message for the CommandMessageInterface. 
-    """
-    return {"activate": "mode"}
+   

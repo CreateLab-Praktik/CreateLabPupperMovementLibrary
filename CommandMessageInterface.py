@@ -21,8 +21,6 @@ class CommandMessageInterface:
         self.udp_subscriber = UDPComms.Subscriber(udp_port, timeout=0.3)
         self.udp_publisher = UDPComms.Publisher(udp_publisher_port)
 
-## TODO: Update message parsing to fit message format.
-
     def get_command(self, state, do_print=False):
         try:
             msg = self.udp_subscriber.get()
