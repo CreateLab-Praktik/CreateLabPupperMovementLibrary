@@ -5,8 +5,10 @@ from src.State import BehaviorState, State
 from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
 
+## this class is going to be an altered version of src.JoystickInterface.py
 
-class UDPInterface:
+
+class CommandMessageInterface:
     def __init__(self, config, udp_port=8830, udp_publisher_port = 8840,):
 
         self.config = config
@@ -16,25 +18,26 @@ class UDPInterface:
         self.previous_activate_toggle = 0
 
         self.message_rate = 50
-        self.udp_handle = UDPComms.Subscriber(udp_port, timeout=0.3)
+        self.udp_subscriber = UDPComms.Subscriber(udp_port, timeout=0.3)
         self.udp_publisher = UDPComms.Publisher(udp_publisher_port)
 
+## TODO: Update message parsing to fit message format.
 
     def get_command(self, state, do_print=False):
         try:
-            msg = self.udp_handle.get()
+            msg = self.udp_subscriber.get()
             command = Command()
             
             ####### Handle discrete commands ########
             # Check if requesting a state transition to trotting, or from trotting to resting
-            gait_toggle = msg["R1"]
+            gait_toggle = msg["trot"]
             command.trot_event = (gait_toggle == 1 and self.previous_gait_toggle == 0)
 
             # Check if requesting a state transition to hopping, from trotting or resting
-            hop_toggle = msg["x"]
+            hop_toggle = msg["hop"]
             command.hop_event = (hop_toggle == 1 and self.previous_hop_toggle == 0)            
             
-            activate_toggle = msg["L1"]
+            activate_toggle = msg["activation"]
             command.activate_event = (activate_toggle == 1 and self.previous_activate_toggle == 0)
 
             # Update previous values for toggles and state
@@ -63,10 +66,10 @@ class UDPInterface:
             )
             command.pitch = state.pitch + message_dt * pitch_rate
 
-            height_movement = msg["dpady"]
+            height_movement = msg["height"]
             command.height = state.height - message_dt * self.config.z_speed * height_movement
             
-            roll_movement = - msg["dpadx"]
+            roll_movement = - msg["roll"]
             command.roll = state.roll + message_dt * self.config.roll_speed * roll_movement
 
             return command

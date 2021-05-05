@@ -2,15 +2,13 @@ import numpy as np
 import time
 from src.IMU import IMU
 from src.Controller import Controller
-from UDPInterface import UDPInterface
+from CommandMessageInterface import CommandMessageInterface
 from src.State import State
 from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
 from pupper.Kinematics import four_legs_inverse_kinematics
 
-def main(use_imu=False):
-    """Main program
-    """
+def run_robot_CreateLab(use_imu=False):
 
     config = Configuration()
     hardware_interface = HardwareInterface()
@@ -28,7 +26,7 @@ def main(use_imu=False):
     state = State()
 
     print("Creating udp listener...")
-    UDP_interface = UDPInterface(config)
+    cmdMsgInterface = CommandMessageInterface(config)
     print("Done.")
 
     last_loop = time.time()
@@ -43,7 +41,7 @@ def main(use_imu=False):
     while True:
         print("Waiting for robot activation...")
         while True:
-            command = UDP_interface.get_command(state)
+            command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
                 break
             time.sleep(0.1)
@@ -56,7 +54,7 @@ def main(use_imu=False):
             last_loop = time.time()
 
             # Parse the udp joystick commands and then update the robot controller's parameters
-            command = UDP_interface.get_command(state)
+            command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
                 print("Deactivating Robot")
                 break
@@ -74,4 +72,4 @@ def main(use_imu=False):
             hardware_interface.set_actuator_postions(state.joint_angles)
 
 
-main()
+run_robot_CreateLab()
