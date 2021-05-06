@@ -1,10 +1,10 @@
 
 def newRawMessage():
     message = {
-        "x_axis_velocity": 512,
-        "y_axis_velocity": 512,
-        "yaw": 512,
-        "pitch": 512,
+        "x_axis_velocity": 0,
+        "y_axis_velocity": 0,
+        "yaw": 0,
+        "pitch": 0,
         "activation": 0,
         "trot": 0,
         "roll_right": 0,
@@ -30,9 +30,19 @@ def message_Trot():
 
     return message
 
-# def walkForwards(3):
+def message_height(amount = 0):
+    ## TODO catch illigal amounts.
+    """
+        returns a message where the height value is equal to amount.
 
-# def stop(wait 2 seconds):
+        amount MUST NEVER be greater than 1 or lower than -1.    
+    """
+    message = newRawMessage()
+
+    message["height"] = amount
+
+    return message
+
 
 def messageParser(RawMessage = newRawMessage(), MESSAGE_RATE = 20 ):
 
@@ -52,10 +62,10 @@ def messageParser(RawMessage = newRawMessage(), MESSAGE_RATE = 20 ):
 
     parsedMessage = {
 
-        "rx": yaw,
-        "ry": pitch,
-        "ly": y_axis_velocity,
-        "lx": x_axis_velocity,
+        "yaw": yaw,
+        "pitch": pitch,
+        "y_axis_velocity": y_axis_velocity,
+        "x_axis_velocity": x_axis_velocity,
         
         "activation": activation,
         "trot": trot,

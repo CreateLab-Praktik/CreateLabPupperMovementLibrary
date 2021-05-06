@@ -44,15 +44,17 @@ class CommandMessageInterface:
             self.previous_activate_toggle = activate_toggle
 
             ####### Handle continuous commands ########
-            x_vel = msg["ly"] * self.config.max_x_velocity
-            y_vel = msg["lx"] * -self.config.max_y_velocity
+            ## CreateLab Comment: It looks wierd that x_vel uses y_axis_velocity, i don't know why. 
+            # I have checked if Stanfords does the same, and they do.  
+            x_vel = msg["y_axis_velocity"] * self.config.max_x_velocity
+            y_vel = msg["x_axis_velocity"] * -self.config.max_y_velocity
             command.horizontal_velocity = np.array([x_vel, y_vel])
-            command.yaw_rate = msg["rx"] * -self.config.max_yaw_rate
+            command.yaw_rate = msg["yaw"] * -self.config.max_yaw_rate
 
             message_rate = msg["message_rate"]
             message_dt = 1.0 / message_rate
 
-            pitch = msg["ry"] * self.config.max_pitch
+            pitch = msg["pitch"] * self.config.max_pitch
             deadbanded_pitch = deadband(
                 pitch, self.config.pitch_deadband
             )
