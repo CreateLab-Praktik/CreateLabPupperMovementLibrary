@@ -1,52 +1,61 @@
 
-def newRawMessage():
-    message = {
-        "x_axis_velocity": 0,
-        "y_axis_velocity": 0,
-        "yaw": 0,
-        "pitch": 0,
-        "activation": 0,
-        "trot": 0,
-        "roll_right": 0,
-        "roll_left": 0,
-        "height_possitive": 0,
-        "height_negative": 0,
-        "hop": 0,
-    }
+class RawMessage:
+    def __init__(self, name = "Raw MSG"):
 
-    return message
+        self.values = {
+            "x_axis_velocity": 0,
+            "y_axis_velocity": 0,
+            "yaw": 0,
+            "pitch": 0,
+            "activation": 0,
+            "trot": 0,
+            "roll_right": 0,
+            "roll_left": 0,
+            "height_possitive": 0,
+            "height_negative": 0,
+            "hop": 0,
+            }
 
-def message_Activation():
-    message = newRawMessage()
+        self.duration = 0
 
-    message["activation"] = 1
+        self.name = name
+        
 
-    return message
 
-def message_Trot():
-    message = newRawMessage()
+def raw_Activation_Msg():
+    rawMessage = RawMessage()
 
-    message["trot"] = 1
+    rawMessage.values["activation"] = 1
+    rawMessage.name = "Activation MSG"
 
-    return message
+    return rawMessage
 
-def message_height(amount = 0):
+def raw_Trot_Msg():
+    rawMessage = RawMessage()
+
+    rawMessage.values["trot"] = 1
+
+    return rawMessage
+
+def raw_Height_Msg(amount = 0):
     ## TODO catch illigal amounts.
     """
         returns a message where the height value is equal to amount.
 
         amount MUST NEVER be greater than 1 or lower than -1.    
     """
-    message = newRawMessage()
+    rawMessage = RawMessage()
 
-    message["height"] = amount
+    rawMessage.values["height"] = 1
+    rawMessage.duration = amount
+    rawMessage.name = "Height MSG"
 
-    return message
+    return rawMessage
 
 
-def messageParser(RawMessage = newRawMessage(), MESSAGE_RATE = 20 ):
+def messageParser(RawMessage, MESSAGE_RATE = 20 ):
 
-    values = RawMessage
+    values = RawMessage.values
 
     yaw = values["yaw"]
     pitch = -values["pitch"]

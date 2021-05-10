@@ -5,9 +5,6 @@ from src.State import BehaviorState, State
 from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
 
-## this class is going to be an altered version of src.JoystickInterface.py
-
-
 class CommandMessageInterface:
     def __init__(self, config, udp_port=8830, udp_publisher_port = 8840,):
 

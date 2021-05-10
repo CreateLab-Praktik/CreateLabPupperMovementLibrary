@@ -39,7 +39,7 @@ def run_robot_CreateLab(use_imu=False):
 
 
     while True:
-        print("Waiting for robot activation...")
+        print("It is CreateLab running")
         while True:
             command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
