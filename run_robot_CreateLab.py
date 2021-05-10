@@ -2,22 +2,16 @@ import numpy as np
 import time
 from src.IMU import IMU
 from src.Controller import Controller
-from CommandMessageInterface import CommandMessageInterface
+from CommandMessageInterface_Pipe import CommandMessageInterface
 from src.State import State
 from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
 from pupper.Kinematics import four_legs_inverse_kinematics
 
-def run_robot_CreateLab(use_imu=False):
+def run_robot_CreateLab(connectionPipe):
 
     config = Configuration()
     hardware_interface = HardwareInterface()
-
-
-    if use_imu:
-        imu = IMU(port="/dev/ttyACM0")
-        imu.flush_buffer()
-
 
     controller = Controller(
         config,
@@ -25,21 +19,15 @@ def run_robot_CreateLab(use_imu=False):
     )
     state = State()
 
-    print("Creating udp listener...")
-    cmdMsgInterface = CommandMessageInterface(config)
+    print("Creating pipe connection...")
+    cmdMsgInterface = CommandMessageInterface(config, connectionPipe)
     print("Done.")
 
     last_loop = time.time()
 
-    print("Summary of gait parameters:")
-    print("overlap time: ", config.overlap_time)
-    print("swing time: ", config.swing_time)
-    print("z clearance: ", config.z_clearance)
-    print("x shift: ", config.x_shift)
-
 
     while True:
-        print("It is CreateLab running")
+        print("run_robot_loop")
         while True:
             command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
@@ -60,16 +48,16 @@ def run_robot_CreateLab(use_imu=False):
                 break
 
             # Read imu data. Orientation will be None if no data was available
-            quat_orientation = (
-                imu.read_orientation() if use_imu else np.array([1, 0, 0, 0])
-            )
+            quat_orientation = np.array([1, 0, 0, 0])
+            
             state.quat_orientation = quat_orientation
 
             # Step the controller forward by dt
             controller.run(state, command)
+            state.printSelf()
 
             # Update the pwm widths going to the servos
             hardware_interface.set_actuator_postions(state.joint_angles)
 
 
-run_robot_CreateLab()
+# run_robot_CreateLab()

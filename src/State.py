@@ -27,6 +27,15 @@ class State:
             print("Robot in HOP mode")
         else:
             print("Robot in DEACTIVATED mode")
+    
+    def printSelf(self):
+        print("""
+        Robot state print: \n   
+        height = """, self.height, " \n "
+        ,)
+
+
+        
 
 
 class BehaviorState(Enum):

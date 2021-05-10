@@ -34,6 +34,7 @@ def raw_Trot_Msg():
     rawMessage = RawMessage()
 
     rawMessage.values["trot"] = 1
+    rawMessage.name = "Trot MSG"
 
     return rawMessage
 
@@ -46,7 +47,7 @@ def raw_Height_Msg(amount = 0):
     """
     rawMessage = RawMessage()
 
-    rawMessage.values["height"] = 1
+    rawMessage.values["height_possitive"] = 1
     rawMessage.duration = amount
     rawMessage.name = "Height MSG"
 
