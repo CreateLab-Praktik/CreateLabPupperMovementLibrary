@@ -15,7 +15,7 @@ def main():
 
         time.sleep(2)
 
-        robot = multiprocessing.Process(target=Robot.run_robot_CreateLab, args=(robot_conn,))
+        robot = multiprocessing.Process(target=Robot.run_robot_CreateLab, args=(robot_conn, True,))
         caster = multiprocessing.Process(target=MsgCaster.broadcast, args=(caster_conn,))
 
         # running processes

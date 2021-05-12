@@ -8,7 +8,7 @@ from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
 from pupper.Kinematics import four_legs_inverse_kinematics
 
-def run_robot_CreateLab(connectionPipe):
+def run_robot_CreateLab(connectionPipe, do_print = False):
 
     config = Configuration()
     hardware_interface = HardwareInterface()
@@ -18,22 +18,25 @@ def run_robot_CreateLab(connectionPipe):
         four_legs_inverse_kinematics,
     )
     state = State()
-
-    print("Creating pipe connection...")
+    if do_print == True:
+        print("Creating pipe connection...")
     cmdMsgInterface = CommandMessageInterface(config, connectionPipe)
-    print("Done.")
+    if do_print == True:
+        print("Done.")
 
     last_loop = time.time()
 
 
     while True:
-        print("run_robot_loop")
+        if do_print == True:
+            print("run_robot_loop")
         while True:
             command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
                 break
             time.sleep(0.1)
-        print("Robot activated.")
+        if do_print == True:
+            print("Robot activated.")
 
         while True:
             now = time.time()
@@ -44,7 +47,8 @@ def run_robot_CreateLab(connectionPipe):
             # Parse the udp joystick commands and then update the robot controller's parameters
             command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
-                print("Deactivating Robot")
+                if do_print == True:
+                    print("Deactivating Robot")
                 break
 
             # Read imu data. Orientation will be None if no data was available
@@ -54,10 +58,8 @@ def run_robot_CreateLab(connectionPipe):
 
             # Step the controller forward by dt
             controller.run(state, command)
-            state.printSelf()
+            if do_print == True:
+                state.printSelf()
 
             # Update the pwm widths going to the servos
             hardware_interface.set_actuator_postions(state.joint_angles)
-
-
-# run_robot_CreateLab()

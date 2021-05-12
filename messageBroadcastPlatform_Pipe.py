@@ -1,4 +1,5 @@
-from BehaviorLibrary import raw_Activation_Msg, raw_Height_Msg, messageParser,raw_Trot_Msg, RawMessage
+import BehaviorLibrary as BL
+import DemoQueues as Demos
 import time
 
 from UDPComms import Publisher, Subscriber, timeout
@@ -11,16 +12,7 @@ def broadcast(connectionPipe):
 
     pipe = connectionPipe
    
-
-    ## Message should be objects instead of functions
-    
-    rawMessageQueue = list()
-
-    rawMessageQueue.append(raw_Activation_Msg())
-    rawMessageQueue.append(raw_Height_Msg(20))
-
-    ## reversing list since pop takes the last item.
-    rawMessageQueue.reverse()
+    rawMessageQueue = Demos.TrotMode()
 
         ## Raw message Loop
 
@@ -30,18 +22,18 @@ def broadcast(connectionPipe):
 
         if len(rawMessageQueue) != 0:
             currentRawMsg = rawMessageQueue.pop()
-            duration = currentRawMsg.duration
+            ticks = currentRawMsg.ticks
             flag = 1
             while flag == 1:
-                pipe.send(messageParser(currentRawMsg))
+                pipe.send(BL.messageParser(currentRawMsg))
                 print("Msg send", currentRawMsg.name)
                 time.sleep(1 / MESSAGE_RATE)
-                duration -= 1
-                if duration <= 0:
+                ticks -= 1
+                if ticks <= 0:
                     flag = 0
         
             
-        pipe.send(messageParser(RawMessage()))
+        pipe.send(BL.messageParser(BL.RawMessage()))
         print("Raw MSG send")
 
 
