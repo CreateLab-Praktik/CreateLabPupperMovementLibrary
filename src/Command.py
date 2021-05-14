@@ -17,3 +17,7 @@ class Command:
         self.hop_event = False
         self.trot_event = False
         self.activate_event = False
+
+    
+
+    

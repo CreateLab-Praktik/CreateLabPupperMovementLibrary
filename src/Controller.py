@@ -31,8 +31,8 @@ class Controller:
 
         ## CreateLab Comment:
         ## these following mappings are dictionaries containing Key:Value Pairs.
-        ## these are used to switch between the robots available states.
-        ## example: if the robot is in a REST state, and we input that state into the trot_transition_mapping Dict, we get the BehaviorState.TROT back.
+        ## these are used to switch between the robots available modes.
+        ## example: if the robot is in a REST mode, and we input that state into the trot_transition_mapping Dict, we get the BehaviorState.TROT back.
 
         self.hop_transition_mapping = {BehaviorState.REST: BehaviorState.HOP, BehaviorState.HOP: BehaviorState.FINISHHOP, BehaviorState.FINISHHOP: BehaviorState.REST, BehaviorState.TROT: BehaviorState.HOP}
         self.trot_transition_mapping = {BehaviorState.REST: BehaviorState.TROT, BehaviorState.TROT: BehaviorState.REST, BehaviorState.HOP: BehaviorState.TROT, BehaviorState.FINISHHOP: BehaviorState.TROT}
@@ -51,7 +51,7 @@ class Controller:
         new_foot_locations = np.zeros((3, 4))
         for leg_index in range(4):
             contact_mode = contact_modes[leg_index]
-            foot_location = state.foot_locations[:, leg_index]
+            self.foot_location = state.foot_locations[:, leg_index]
             if contact_mode == 1:
                 new_location = self.stance_controller.next_foot_location(leg_index, state, command)
             else:

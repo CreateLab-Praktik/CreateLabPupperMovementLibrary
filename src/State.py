@@ -16,7 +16,30 @@ class State:
         self.foot_locations = np.zeros((3, 4))
         self.joint_angles = np.zeros((3, 4))
 
-        self.behavior_state = BehaviorState.REST
+    def behaviorStateAsString(self):
+        if self.behavior_state == BehaviorState.REST:
+            return"Robot in REST mode"
+        elif self.behavior_state == BehaviorState.TROT:
+            return"Robot in TROT mode"
+        elif self.behavior_state == BehaviorState.HOP:
+            return"Robot in HOP mode"
+        else:
+            return"Robot in DEACTIVATED mode"
+    
+    def printSelf(self):
+        print(
+        "Robot state print: \n"   
+        "height = ", self.height, " \n "
+        "yaw_rate = ", self.yaw_rate, " \n "
+        "pitch = ", self.pitch, " \n "
+        "roll = ", self.roll, " \n "
+        "activation = ", self.activation, " \n "
+        "ticks = ", self.ticks, " \n "
+        "mode = ",self.behaviorStateAsString(), "\n"
+        ,)
+
+
+        
 
 
 class BehaviorState(Enum):
