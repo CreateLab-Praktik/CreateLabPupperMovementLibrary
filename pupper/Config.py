@@ -1,6 +1,5 @@
 import numpy as np
 from pupper.ServoCalibration import MICROS_PER_RAD, NEUTRAL_ANGLE_DEGREES
-from pupper.HardwareConfig import PS4_COLOR, PS4_DEACTIVATED_COLOR
 from enum import Enum
 
 # TODO: put these somewhere else
@@ -30,9 +29,6 @@ class ServoParams:
 
 class Configuration:
     def __init__(self):
-        ################# CONTROLLER BASE COLOR ##############
-        self.ps4_color = PS4_COLOR    
-        self.ps4_deactivated_color = PS4_DEACTIVATED_COLOR    
 
         #################### COMMANDS ####################
         self.max_x_velocity = 0.4
@@ -70,6 +66,7 @@ class Configuration:
         #################### GAIT #######################
         ## CreateLab Comment
         ## self.dt controls the speed of the robots Gait, 
+        ## TODO Solve the slow gait problem, see Trello board for clarafication.
         self.dt = 0.01
         self.num_phases = 4
         self.contact_phases = np.array(

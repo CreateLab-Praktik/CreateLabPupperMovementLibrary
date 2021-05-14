@@ -1,6 +1,5 @@
 import numpy as np
 import time
-from src.IMU import IMU
 from src.Controller import Controller
 from CommandMessageInterface_Pipe import CommandMessageInterface
 from src.State import State
@@ -25,7 +24,6 @@ def run_robot_CreateLab(connectionPipe, do_print = False):
         print("Done.")
 
     last_loop = time.time()
-
 
     while True:
         if do_print == True:

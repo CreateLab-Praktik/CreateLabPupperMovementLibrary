@@ -27,9 +27,9 @@ class State:
             return"Robot in DEACTIVATED mode"
     
     def printSelf(self):
-        print("""
-        Robot state print: \n   
-        height = """, self.height, " \n "
+        print(
+        "Robot state print: \n"   
+        "height = ", self.height, " \n "
         "yaw_rate = ", self.yaw_rate, " \n "
         "pitch = ", self.pitch, " \n "
         "roll = ", self.roll, " \n "

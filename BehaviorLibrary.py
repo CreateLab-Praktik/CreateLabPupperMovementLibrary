@@ -25,7 +25,7 @@ class RawMessage:
             "hop": 0,
             }
 
-def messageParser(RawMessage, MESSAGE_RATE = 20 ):
+def messageParser(RawMessage, MESSAGE_RATE = 50 ):
     """
         returnes a parsed message that can be parsed into a command by the Command Message Interface.
     """

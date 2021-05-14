@@ -49,8 +49,9 @@ class CommandMessageInterface:
             command.yaw_rate = msg["yaw"] * -self.config.max_yaw_rate
 
             message_rate = msg["message_rate"]
+            print("Message Rate ------------------> ", message_rate)
             message_dt = 1.0 / message_rate
-
+            print("Message downtime ------------------------>", message_dt)
             pitch = msg["pitch"] * self.config.max_pitch
             deadbanded_pitch = deadband(
                 pitch, self.config.pitch_deadband
