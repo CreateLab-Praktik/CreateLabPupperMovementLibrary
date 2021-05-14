@@ -7,8 +7,8 @@ def TrotMode():
     rawMessageQueue.append(BL.raw_msg_Wait(50))
 
     rawMessageQueue.append(BL.raw_msg_Trot())
-   
 
+   
     rawMessageQueue.reverse()
 
     return rawMessageQueue

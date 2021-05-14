@@ -17,6 +17,7 @@ class RawMessage:
             "yaw": 0,
             "pitch": 0,
             "activation": 0,
+            "deactivate": 0,
             "trot": 0,
             "roll_right": 0,
             "roll_left": 0,
@@ -38,6 +39,7 @@ def messageParser(RawMessage, MESSAGE_RATE = 50 ):
     y_axis_velocity = -values["y_axis_velocity"]
 
     activation = values["activation"]
+    deactivate = values["deactivate"]
     trot = values["trot"]
     hop = values["hop"]
 
@@ -57,6 +59,7 @@ def messageParser(RawMessage, MESSAGE_RATE = 50 ):
 
         "height": height,
         "hop": hop,
+        "deactivate": deactivate,
         "message_rate": MESSAGE_RATE,
     }
 
@@ -73,6 +76,7 @@ def raw_msg_Wait(ticks = 20):
     return rawMessage
 
 ############### Mode switching functions
+
 
 def raw_msg_Activation():
 
