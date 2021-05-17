@@ -20,7 +20,8 @@ def main():
 
         # running processes
         robot.start()
-        time.sleep(2)
+        time.sleep(1)
+                
         caster.start()
 
         # wait until processes finish

@@ -45,6 +45,7 @@ def run_robot_CreateLab(connectionPipe, do_print = False):
             # Parse the udp joystick commands and then update the robot controller's parameters
             command = cmdMsgInterface.get_command(state)
             if command.activate_event == 1:
+                hardware_interface.deactivate_servos()
                 if do_print == True:
                     print("Deactivating Robot")
                 break

@@ -4,14 +4,11 @@ def TrotMode():
     rawMessageQueue = list()
 
     rawMessageQueue.append(BL.raw_msg_Activation())
-    rawMessageQueue.append(BL.raw_msg_Wait(50))
-
-    rawMessageQueue.append(BL.raw_msg_Trot())
-
-   
+    rawMessageQueue.append(BL.raw_msg_Wait(20))
     rawMessageQueue.reverse()
 
     return rawMessageQueue
+    
 def ActiveMode():
     """
         Return a queue stacked with messages demoing an activation, including height, pitch, roll, and yaw.
