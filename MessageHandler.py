@@ -6,6 +6,9 @@ from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
 
 class MessageHandler:
+    """
+        An object than can send and receive messages from a process pipe, and then turn those messages into commands. 
+    """
     def __init__(self, config, TransmissionPipe):
 
         self.config = config
@@ -19,7 +22,7 @@ class MessageHandler:
 
 
     def get_command_from_pipe(self, state, do_print=False):
-
+        
         msg = self.pipe.recv()
         command = Command()
         

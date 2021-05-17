@@ -1,6 +1,9 @@
 import BehaviorLibrary as BL
 
-def TrotMode():
+def Test():
+    """
+        returns a queue that only activates and then deactivates the robot.
+    """
     rawMessageQueue = list()
 
     rawMessageQueue.append(BL.msg_Activation())
@@ -12,7 +15,7 @@ def TrotMode():
 
 def ActiveMode():
     """
-        Return a queue stacked with messages demoing an activation, including height, pitch, roll, and yaw.
+        returns a queue stacked with messages demoing activation, height, pitch, roll, and yaw messages.
     """
 
     rawMessageQueue = list()

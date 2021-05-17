@@ -3,7 +3,7 @@ class RawMessage:
     def __init__(self, name = "Raw MSG"):
         """
             A message template that forms the basis for State altering commands.
-                !must be parsed before robot can understand!
+                !must be parsed before a messageHandler object can convert its data into a Command.
 
                 name is used for debugging
 
@@ -32,8 +32,6 @@ class RawMessage:
 
             in this proces the amount of ticks this message will take is lost.
         """
-
-        values = RawMessage.values
 
         yaw = self.values["yaw"]
         pitch = -self.values["pitch"]

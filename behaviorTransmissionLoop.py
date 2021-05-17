@@ -11,7 +11,7 @@ def start(TransmissionPipe, stopWhenEmpty = False):
 
     pipe = TransmissionPipe
    
-    rawMessageQueue = Demos.TrotMode()
+    rawMessageQueue = Demos.Test()
 
         ## Raw message Loop
 
