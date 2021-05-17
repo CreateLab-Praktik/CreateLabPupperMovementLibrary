@@ -1,7 +1,7 @@
 import numpy as np
 import time
 from src.Controller import Controller
-from CommandMessageInterface_Pipe import CommandMessageInterface
+from MessageHandler import MessageHandler
 from src.State import State
 from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
@@ -17,19 +17,26 @@ def run_robot_CreateLab(connectionPipe, do_print = False):
         four_legs_inverse_kinematics,
     )
     state = State()
+
     if do_print == True:
         print("Creating pipe connection...")
-    cmdMsgInterface = CommandMessageInterface(config, connectionPipe)
+    msgHandler = MessageHandler(config, connectionPipe)
     if do_print == True:
         print("Done.")
 
     last_loop = time.time()
+    deactivate = False
 
     while True:
+
+        if deactivate == True:
+            print("Robot loop terminated")
+            break
         if do_print == True:
-            print("run_robot_loop")
+            print("Main robot loop")
         while True:
-            command = cmdMsgInterface.get_command(state)
+            print("Activation robot loop")
+            command = msgHandler.get_command_from_pipe(state)
             if command.activate_event == 1:
                 break
             time.sleep(0.1)
@@ -37,15 +44,16 @@ def run_robot_CreateLab(connectionPipe, do_print = False):
             print("Robot activated.")
 
         while True:
+            print("commandprocessing loop")
             now = time.time()
             if now - last_loop < config.dt:
                 continue
             last_loop = time.time()
 
             # Parse the udp joystick commands and then update the robot controller's parameters
-            command = cmdMsgInterface.get_command(state)
+            command = msgHandler.get_command_from_pipe(state)
             if command.activate_event == 1:
-                hardware_interface.deactivate_servos()
+                deactivate = True
                 if do_print == True:
                     print("Deactivating Robot")
                 break
