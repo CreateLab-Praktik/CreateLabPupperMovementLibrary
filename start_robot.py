@@ -2,8 +2,8 @@ import multiprocessing
 import time
 import sys
 
-import behaviorTransmissionLoop as transLoop
-import run_robot_CreateLab as Robot
+from PupperAutomaton.behaviorTransmissionLoop import transmissionLoopStart as transLoop
+from PupperAutomaton.run_robot_CreateLab import run_robot_CreateLab as robotLoop
 
 
 
@@ -16,8 +16,8 @@ def main():
 
         time.sleep(2)
 
-        robot = multiprocessing.Process(target=Robot.run_robot_CreateLab, args=(robot_conn, True,))
-        transmission = multiprocessing.Process(target=transLoop.start, args=(transLoop_conn,True,))
+        robot = multiprocessing.Process(target=robotLoop, args=(robot_conn, True,))
+        transmission = multiprocessing.Process(target=transLoop, args=(transLoop_conn,True,))
 
         # running processes
         robot.start()

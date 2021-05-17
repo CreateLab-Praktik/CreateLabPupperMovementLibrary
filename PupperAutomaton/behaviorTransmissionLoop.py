@@ -1,17 +1,17 @@
-import BehaviorLibrary as BL
-import RawMessage as RawMsg
-import DemoQueues as Demos
+from .BehaviorLibrary import *
+from .RawMessage import *
+from .DemoQueues import Test
 import time
 
 
-def start(TransmissionPipe, stopWhenEmpty = False):
+def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
 
     ## Configurable ##
     MESSAGE_RATE = 20
 
     pipe = TransmissionPipe
    
-    rawMessageQueue = Demos.Test()
+    rawMessageQueue = Test()
 
         ## Raw message Loop
 
@@ -39,7 +39,7 @@ def start(TransmissionPipe, stopWhenEmpty = False):
         
 
             
-        pipe.send(RawMsg.RawMessage().parsed())
+        pipe.send(RawMessage().parsed())
         print("Raw MSG send")
 
         if stopWhenEmpty == True and queueEmpty == True :

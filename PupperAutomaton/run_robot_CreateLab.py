@@ -1,7 +1,7 @@
 import numpy as np
 import time
 from src.Controller import Controller
-from MessageHandler import MessageHandler
+from .MessageHandler import MessageHandler
 from src.State import State
 from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
