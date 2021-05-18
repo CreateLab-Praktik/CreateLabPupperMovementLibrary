@@ -2,8 +2,8 @@ import multiprocessing
 import time
 import sys
 
-from PupperAutomaton.behaviorTransmissionLoop import transmissionLoopStart as transLoop
-from PupperAutomaton.run_robot_CreateLab import run_robot_CreateLab as robotLoop
+from PupperAutomation.behaviorTransmissionLoop import transmissionLoopStart as transLoop
+from PupperAutomation.run_robot_CreateLab import run_robot_CreateLab as robotLoop
 
 
 
@@ -31,8 +31,5 @@ def main():
 
         robot.terminate()
         transmission.terminate()
-
- 
-
 
 main()

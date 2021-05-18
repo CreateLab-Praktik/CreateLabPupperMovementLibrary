@@ -1,6 +1,4 @@
-import os, sys
-
-from PupperAutomaton.RawMessage import *
+from PupperAutomation.RawMessage import RawMessage
 
 ############### Utility functions
 
