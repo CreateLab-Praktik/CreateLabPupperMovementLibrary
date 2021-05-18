@@ -1,0 +1,1 @@
+/boot/appliance/home/pi/devTools_installer.sh
