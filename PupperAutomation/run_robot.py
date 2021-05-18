@@ -7,9 +7,9 @@ from pupper.HardwareInterface import HardwareInterface
 from pupper.Config import Configuration
 from pupper.Kinematics import four_legs_inverse_kinematics
 
-def run_robot_CreateLab(connectionPipe, do_print = False):
+def run_robot(connectionPipe, do_print = False):
     """
-        A loop function cabable of updating a pupper robots state object based of of commands recieved from a process pipe.
+        A loop function cabable of updating a pupper robots state object based of of commands recieved via pipe form the transmission loop.
         
     """
 

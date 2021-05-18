@@ -3,7 +3,7 @@ import time
 import sys
 
 from PupperAutomation.behaviorTransmissionLoop import transmissionLoopStart as transLoop
-from PupperAutomation.run_robot_CreateLab import run_robot_CreateLab as robotLoop
+from PupperAutomation.run_robot import run_robot as robotLoop
 
 
 
