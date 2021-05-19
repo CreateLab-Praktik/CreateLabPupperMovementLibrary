@@ -1,11 +1,9 @@
 from .BehaviorLibrary import *
 from .RawMessage import *
 from .DemoQueues import test, behavioerDemo
-import datetime
+
 
 def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
-
-    MESSAGE_RATE = 20
 
     pipe = TransmissionPipe
    
@@ -27,8 +25,7 @@ def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
             while messageDone == False:
 
                 pipe.send(currentRawMsg.parsed())
-                stamp = datetime.datetime.now()
-                print("Msg send", currentRawMsg.name, "At: ", stamp)
+
                 ticks -= 1
 
                 if ticks <= 0:
@@ -36,8 +33,6 @@ def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
 
 
         pipe.send(RawMessage().parsed())
-        stamp = datetime.datetime
-        print("Msg send", currentRawMsg.name, "At: ", stamp)
 
         if stopWhenEmpty == True and queueEmpty == True :
             break

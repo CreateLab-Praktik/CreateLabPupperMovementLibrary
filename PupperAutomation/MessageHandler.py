@@ -1,5 +1,4 @@
 import numpy as np
-import datetime
 from src.State import BehaviorState
 from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
@@ -23,8 +22,6 @@ class MessageHandler:
     def get_command_from_pipe(self, state, do_print=False):
         
         msg = self.pipe.recv()
-        stamp = datetime.datetime
-        print("Msg send", msg["name"], "At: ", stamp.ctime)
         command = Command()
         
         ####### Handle discrete commands ########
