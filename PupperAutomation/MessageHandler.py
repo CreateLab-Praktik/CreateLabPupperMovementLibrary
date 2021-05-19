@@ -1,4 +1,5 @@
 import numpy as np
+import datetime
 from src.State import BehaviorState
 from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
@@ -22,6 +23,8 @@ class MessageHandler:
     def get_command_from_pipe(self, state, do_print=False):
         
         msg = self.pipe.recv()
+        stamp = datetime.datetime
+        print("Msg send", msg["name"], "At: ", stamp.ctime)
         command = Command()
         
         ####### Handle discrete commands ########
@@ -48,11 +51,8 @@ class MessageHandler:
         y_vel = msg["x_axis_velocity"] * -self.config.max_y_velocity
         command.horizontal_velocity = np.array([x_vel, y_vel])
         command.yaw_rate = msg["yaw"] * -self.config.max_yaw_rate
-
         message_rate = msg["message_rate"]
-        print("Message Rate ------------------> ", message_rate)
         message_dt = 1.0 / message_rate
-        print("Message downtime ------------------------>", message_dt)
         pitch = msg["pitch"] * self.config.max_pitch
         deadbanded_pitch = deadband(
             pitch, self.config.pitch_deadband

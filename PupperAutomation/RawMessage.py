@@ -47,7 +47,7 @@ class RawMessage:
         height = self.values["height_possitive"] - self.values["height_negative"]
 
         parsedMessage = {
-
+            "name": self.name,
             "yaw": yaw,
             "pitch": pitch,
             "y_axis_velocity": y_axis_velocity,

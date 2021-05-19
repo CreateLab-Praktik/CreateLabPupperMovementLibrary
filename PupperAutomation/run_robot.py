@@ -48,7 +48,6 @@ def run_robot(connectionPipe, do_print = False):
             print("Robot activated.")
 
         while True:
-            print("commandprocessing loop")
             now = time.time()
             if now - last_loop < config.dt:
                 continue

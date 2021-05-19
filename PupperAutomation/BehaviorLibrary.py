@@ -5,7 +5,7 @@ from .RawMessage import RawMessage
 def msg_Wait(ticks = 20):
     rawMessage = RawMessage("Waiting")
     rawMessage.ticks = ticks
-
+    
     return rawMessage
 
 ############### Mode switching functions
@@ -90,3 +90,6 @@ def msg_Pitch_Down(ticks = 0):
     rawMessage.ticks = ticks
 
     return rawMessage
+
+############## Forwards, Backwards, Sideways right, and left, functions
+

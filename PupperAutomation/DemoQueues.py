@@ -8,7 +8,9 @@ def test():
 
     rawMessageQueue.append(msg_Activation())
     rawMessageQueue.append(msg_Wait(20))
-    rawMessageQueue.append(msg_Activation())
+    rawMessageQueue.append(msg_Trot())
+    rawMessageQueue.append(msg_Wait(2000))
+    rawMessageQueue.append(msg_Trot())
     rawMessageQueue.reverse()
 
     return rawMessageQueue
@@ -23,10 +25,10 @@ def behavioerDemo():
     rawMessageQueue.append(msg_Activation())
     rawMessageQueue.append(msg_Wait(100))
 
-    rawMessageQueue.append(msg_Height_Increase(20))
+    rawMessageQueue.append(msg_Height_Increase(60))
     rawMessageQueue.append(msg_Wait(20))
 
-    rawMessageQueue.append(msg_Height_Decrease(20))
+    rawMessageQueue.append(msg_Height_Decrease(60))
     rawMessageQueue.append(msg_Wait(20))
 
     rawMessageQueue.append(msg_Roll_Right(30))
