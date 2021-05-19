@@ -1,6 +1,6 @@
 from .BehaviorLibrary import *
 
-def Test():
+def test():
     """
         returns a queue that only activates and then deactivates the robot.
     """
@@ -13,7 +13,7 @@ def Test():
 
     return rawMessageQueue
 
-def ActiveMode():
+def behavioerDemo():
     """
         returns a queue stacked with messages demoing activation, height, pitch, roll, and yaw messages.
     """

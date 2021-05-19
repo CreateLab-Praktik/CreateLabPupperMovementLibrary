@@ -1,6 +1,6 @@
 from .BehaviorLibrary import *
 from .RawMessage import *
-from .DemoQueues import Test
+from .DemoQueues import test, behavioerDemo
 import time
 
 
@@ -11,7 +11,7 @@ def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
 
     pipe = TransmissionPipe
    
-    rawMessageQueue = Test()
+    rawMessageQueue = behavioerDemo()
 
         ## Raw message Loop
 
@@ -31,21 +31,18 @@ def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
             while flag == 1:
                 pipe.send(currentRawMsg.parsed())
                 print("Msg send", currentRawMsg.name)
+                #TODO Figure out why sleep is required.
                 time.sleep(1 / MESSAGE_RATE)
                 ticks -= 1
                 if ticks <= 0:
                     flag = 0
 
-        
 
-            
         pipe.send(RawMessage().parsed())
         print("Raw MSG send")
 
         if stopWhenEmpty == True and queueEmpty == True :
             break
-
-        time.sleep(1 / MESSAGE_RATE)
 
 
 

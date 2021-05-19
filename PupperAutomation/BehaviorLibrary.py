@@ -1,4 +1,4 @@
-from PupperAutomation.RawMessage import RawMessage
+from .RawMessage import RawMessage
 
 ############### Utility functions
 
