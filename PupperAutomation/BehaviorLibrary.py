@@ -1,95 +1,125 @@
-from .RawMessage import RawMessage
+from .ActionMessage import ActionMessage
 
 ############### Utility functions
 
 def msg_Wait(ticks = 20):
-    rawMessage = RawMessage("Waiting")
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Waiting")
+    actionMessage.ticks = ticks
     
-    return rawMessage
+    return actionMessage
 
 ############### Mode switching functions
 
 
 def msg_Activation():
 
-    rawMessage = RawMessage("Activation")
-    rawMessage.values["activation"] = 1
+    actionMessage = ActionMessage("Activation")
+    actionMessage.activation = 1
 
-    return rawMessage
+    return actionMessage
 
 def msg_Trot():
 
-    rawMessage = RawMessage("Trot")
-    rawMessage.values["trot"] = 1
+    actionMessage = ActionMessage("Trot")
+    actionMessage.trot = 1
  
-    return rawMessage
+    return actionMessage
 
 ############## Heigth and Roll functions
 
 def msg_Height_Increase(ticks = 0):
 
-    rawMessage = RawMessage("Increasing Height")
-    rawMessage.values["height_possitive"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Increasing Height")
+    actionMessage.height_possitive = 1
+    actionMessage.ticks = ticks
   
-    return rawMessage
+    return actionMessage
 
     
 def msg_Height_Decrease(ticks = 0):
 
-    rawMessage = RawMessage("Decreasing Height")
-    rawMessage.values["height_negative"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Decreasing Height")
+    actionMessage.height_negative = 1
+    actionMessage.ticks = ticks
   
-    return rawMessage
+    return actionMessage
 
 def msg_Roll_Right(ticks = 0):
 
-    rawMessage = RawMessage("Roll MSG")
-    rawMessage.values["roll_right"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Roll MSG")
+    actionMessage.roll_right = 1
+    actionMessage.ticks = ticks
 
-    return rawMessage
+    return actionMessage
 
     
 def msg_Roll_Left(ticks = 0, right = True):
 
-    rawMessage = RawMessage("Roll MSG")
-    rawMessage.values["roll_left"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Roll MSG")
+    actionMessage.roll_left = 1
+    actionMessage.ticks = ticks
 
-    return rawMessage
+    return actionMessage
 
 ############## Yaw and Pitch functions
 
-def msg_Yaw_Left(ticks = 0):
-    rawMessage = RawMessage("Yaw left")
-    rawMessage.values["yaw"] = -1
-    rawMessage.ticks = ticks
-
-    return rawMessage
-
 def msg_Yaw_Right(ticks = 0):
-    rawMessage = RawMessage("Yaw Right")
-    rawMessage.values["yaw"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Yaw right")
+    actionMessage.yaw = 1
+    actionMessage.ticks = ticks
 
-    return rawMessage
+    return actionMessage
+
+def msg_Yaw_Left(ticks = 0):
+    actionMessage = ActionMessage("Yaw left")
+    actionMessage.yaw = -1
+    actionMessage.ticks = ticks
+
+    return actionMessage
 
 def msg_Pitch_Up(ticks = 0):
-    rawMessage = RawMessage("Pitch Up")
-    rawMessage.values["pitch"] = -1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Pitch Up")
+    actionMessage.pitch = -1
+    actionMessage.ticks = ticks
 
-    return rawMessage
+    return actionMessage
 
 def msg_Pitch_Down(ticks = 0):
-    rawMessage = RawMessage("Pitch Down")
-    rawMessage.values["pitch"] = 1
-    rawMessage.ticks = ticks
+    actionMessage = ActionMessage("Pitch Down")
+    actionMessage.pitch = 1
+    actionMessage.ticks = ticks
 
-    return rawMessage
+    return actionMessage
 
-############## Forwards, Backwards, Sideways right, and left, functions
+############## Forwards, Backwards, Strafing(right and left), momentum functions.
+
+def msg_Forwards(ticks = 0):
+    actionMessage = ActionMessage("forwards")
+    actionMessage.y_axis_velocity = -1
+    actionMessage.ticks = ticks
+
+    return actionMessage
+
+def msg_Backwards(ticks = 0):
+    actionMessage = ActionMessage("backwards")
+    actionMessage.y_axis_velocity = 1
+    actionMessage.ticks = ticks
+
+    return actionMessage
+
+def msg_Strafe_Right(ticks = 0):
+    actionMessage = ActionMessage("strafe right")
+    actionMessage.x_axis_velocity = 1
+    actionMessage.ticks = ticks
+
+    return actionMessage
+
+def msg_Strafe_Left(ticks = 0):
+    actionMessage = ActionMessage("strafe left")
+    actionMessage.x_axis_velocity = -1
+    actionMessage.ticks = ticks
+
+    return actionMessage
+
+
 

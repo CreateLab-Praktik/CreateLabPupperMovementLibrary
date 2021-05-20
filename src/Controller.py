@@ -80,7 +80,6 @@ class Controller:
         ########## Update operating state based on command ######
         if command.activate_event:
             state.behavior_state = self.activate_transition_mapping[state.behavior_state]
-            print("Activate event")
         elif command.trot_event:
             state.behavior_state = self.trot_transition_mapping[state.behavior_state]
         elif command.hop_event:

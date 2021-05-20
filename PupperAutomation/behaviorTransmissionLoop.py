@@ -1,30 +1,30 @@
 from .BehaviorLibrary import *
-from .RawMessage import *
-from .DemoQueues import test, behavioerDemo
+from .ActionMessage import *
+from .DemoQueues import test, behavioerDemo, walkTest
 
 
 def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
 
     pipe = TransmissionPipe
    
-    rawMessageQueue = test()
+    actionMessageQueue = walkTest()
 
     queueEmpty = False
 
     while True:
 
-        if len(rawMessageQueue) <= 0:
+        if len(actionMessageQueue) <= 0:
             queueEmpty = True
 
-        if len(rawMessageQueue) != 0:
+        if len(actionMessageQueue) != 0:
 
-            currentRawMsg = rawMessageQueue.pop()
-            ticks = currentRawMsg.ticks
+            currentActionMsg = actionMessageQueue.pop()
+            ticks = currentActionMsg.ticks
             messageDone = False
 
             while messageDone == False:
 
-                pipe.send(currentRawMsg.parsed())
+                pipe.send(currentActionMsg.parsed())
 
                 ticks -= 1
 
@@ -32,7 +32,7 @@ def transmissionLoopStart(TransmissionPipe, stopWhenEmpty = False):
                     messageDone = True
 
 
-        pipe.send(RawMessage().parsed())
+        pipe.send(ActionMessage().parsed())
 
         if stopWhenEmpty == True and queueEmpty == True :
             break
