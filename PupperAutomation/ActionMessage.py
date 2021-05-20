@@ -1,4 +1,4 @@
-## TODO incorporate this as a dictionary with the number of ticks as a Key:Value Pair.
+
 class ActionMessage:
     def __init__(self, name = "Neutral MSG"):
         """

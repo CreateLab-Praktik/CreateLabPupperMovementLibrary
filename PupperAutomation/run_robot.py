@@ -36,14 +36,18 @@ def run_robot(connectionPipe, do_print = False):
         if deactivate == True:
             print("Robot loop terminated")
             break
+
         if do_print == True:
             print("Main robot loop")
+
         while True:
-            print("Activation robot loop")
+
             command = msgHandler.get_command_from_pipe(state)
             if command.activate_event == 1:
                 break
+
             time.sleep(0.1)
+            
         if do_print == True:
             print("Robot activated.")
 
@@ -53,7 +57,6 @@ def run_robot(connectionPipe, do_print = False):
                 continue
             last_loop = time.time()
 
-            # Parse the udp joystick commands and then update the robot controller's parameters
             command = msgHandler.get_command_from_pipe(state)
             if command.activate_event == 1:
                 deactivate = True
@@ -61,7 +64,7 @@ def run_robot(connectionPipe, do_print = False):
                     print("Deactivating Robot")
                 break
 
-            # Read imu data. Orientation will be None if no data was available
+            # TODO are the quat_orientation lines neccesery?
             quat_orientation = np.array([1, 0, 0, 0])
             
             state.quat_orientation = quat_orientation
