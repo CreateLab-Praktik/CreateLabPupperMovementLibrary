@@ -1,9 +1,9 @@
 import multiprocessing
 import time
-import sys
 
-import messageBroadcastPlatform_Pipe as MsgCaster
-import run_robot_CreateLab as Robot
+from PupperAutomation.behaviorTransmissionLoop import transmissionLoopStart as transLoop
+from PupperAutomation.run_robot import run_robot as robotLoop
+
 
 
 
@@ -11,22 +11,26 @@ def main():
 
    if __name__ == "__main__":
 
-        robot_conn, caster_conn = multiprocessing.Pipe()
+        robot_conn, transLoop_conn = multiprocessing.Pipe()
 
         time.sleep(2)
 
-        robot = multiprocessing.Process(target=Robot.run_robot_CreateLab, args=(robot_conn, True,))
-        caster = multiprocessing.Process(target=MsgCaster.broadcast, args=(caster_conn,))
+        robot = multiprocessing.Process(target=robotLoop, args=(robot_conn, True,))
+        transmission = multiprocessing.Process(target=transLoop, args=(transLoop_conn,False,))
 
+        
         # running processes
         robot.start()
-        time.sleep(2)
-        caster.start()
+        ## This sleep timer ensures that the robot is listening before the eventQueue is executed.
+        time.sleep(1)
+                
+        transmission.start()
 
         # wait until processes finish
         robot.join()
-        caster.join()
+        transmission.join()
 
-
+        robot.terminate()
+        transmission.terminate()
 
 main()
