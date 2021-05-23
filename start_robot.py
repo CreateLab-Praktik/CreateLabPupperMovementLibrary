@@ -2,7 +2,7 @@ import multiprocessing
 import time
 
 from PupperAutomation.ActionLoop import ActionLoop
-from PupperAutomation.preLoadedQueues import walkTest
+import PupperAutomation.preLoadedQueues as Demos
 from PupperAutomation.run_robot import run_robot as robotLoop
 
 
@@ -16,7 +16,7 @@ def main():
 
         actionLoop = ActionLoop(transLoop_conn)
 
-        actionLoop.actionQueue = walkTest()
+        actionLoop.actionQueue = Demos.walkTest()
 
         time.sleep(2)
 
