@@ -21,7 +21,7 @@ def main():
         time.sleep(2)
 
         robot = multiprocessing.Process(target=robotLoop, args=(robot_conn, True,))
-        transmission = multiprocessing.Process(target=actionLoop.transmissionLoopStart, args=())
+        transmission = multiprocessing.Process(target=actionLoop.start, args=())
 
         
         # running processes

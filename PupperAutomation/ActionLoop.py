@@ -14,7 +14,7 @@ class ActionLoop:
         self.actionQueue = Queue()
 
         
-    def transmissionLoopStart(self):
+    def start(self):
         """
             When called starts sending one message at a time from the actionQueue to the other end of the Multiprocessing pipe connection.
         """
