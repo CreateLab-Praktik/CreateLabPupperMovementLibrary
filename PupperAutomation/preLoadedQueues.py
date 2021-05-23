@@ -2,6 +2,7 @@ from .behaviorFunctions import *
 from queue import Queue
 
 def walkTest():
+    
     actionsMessageQueue = Queue()
 
     actionsMessageQueue.put(msg_Activation())

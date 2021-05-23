@@ -39,9 +39,6 @@ class State:
         ,)
 
 
-        
-
-
 class BehaviorState(Enum):
     DEACTIVATED = -1
     REST = 0
