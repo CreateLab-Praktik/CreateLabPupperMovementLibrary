@@ -10,10 +10,10 @@ class MessageInectionInterface:
     def injectionLoop(self):
         
 
-        print("Sending interruption in 5 seconds")
+        print("Sending injection in 5 seconds")
         time.sleep(5.0)
         self.connection.send(msg_Trot(interrupt = False))
-        print("interruption send")
+        print("injection sendt")
             
         
 
