@@ -1,6 +1,6 @@
 
 class ActionMessage:
-    def __init__(self, name = "Neutral MSG"):
+    def __init__(self, name = "Neutral MSG", Interrupt = False):
         """
             A message template that forms the basis for State altering commands.
                 an actionMessage can alter more than one State object atribute 
@@ -11,7 +11,8 @@ class ActionMessage:
 
         self.name = name
         self.ticks = 0
- 
+        self.interrupt = Interrupt
+
         self.x_axis_velocity = 0
         self.y_axis_velocity = 0
  
