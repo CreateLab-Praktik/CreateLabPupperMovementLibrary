@@ -2,12 +2,13 @@ import numpy as np
 from src.State import BehaviorState
 from src.Command import Command
 from src.Utilities import deadband, clipped_first_order_filter
+from multiprocessing import connection
 
 class MessageHandler:
     """
-        An object than can send and receive messages from a process pipe, and then turn those messages into commands. 
+        An object than can receive messages from a process pipe connection. 
     """
-    def __init__(self, config, TransmissionPipe):
+    def __init__(self, config, PipeConnection: connection.Connection):
 
         self.config = config
         self.previous_gait_toggle = 0
@@ -16,10 +17,13 @@ class MessageHandler:
         self.previous_activate_toggle = 0
 
         self.message_rate = 50
-        self.pipe = TransmissionPipe
+        self.pipe = PipeConnection
 
 
     def get_command_from_pipe(self, state, do_print=False):
+        """
+            Returns a command object created based on the lastest message sendt from an ActionLoop queue.
+        """
         
         msg = self.pipe.recv()
         command = Command()
@@ -43,7 +47,7 @@ class MessageHandler:
 
         ####### Handle continuous commands ########
         ## CreateLab Comment: It looks wierd that x_vel uses y_axis_velocity, i don't know why. 
-        # I have checked if Stanfords does the same, and they do.  
+        # I have checked if it is the same in Stanfords Software, and it is.
         x_vel = msg["y_axis_velocity"] * self.config.max_x_velocity
         y_vel = msg["x_axis_velocity"] * -self.config.max_y_velocity
         command.horizontal_velocity = np.array([x_vel, y_vel])

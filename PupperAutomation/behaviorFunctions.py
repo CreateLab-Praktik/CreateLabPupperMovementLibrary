@@ -18,10 +18,11 @@ def msg_Activation():
 
     return actionMessage
 
-def msg_Trot():
+def msg_Trot(interrupt: bool = False):
 
     actionMessage = ActionMessage("Trot")
     actionMessage.trot = 1
+    actionMessage.interrupt = interrupt
  
     return actionMessage
 
