@@ -8,7 +8,7 @@ from pupper.Config import Configuration
 from pupper.Kinematics import four_legs_inverse_kinematics
 from multiprocessing import connection
 
-def run_robot(PipeConnection: connection.Connection, printState = False):
+def run_robot(PipeConnection: connection.Connection, printState: bool = False):
     """
         A loop function cabable of updating a pupper robots state object based of of commands recieved via pipe form the transmission loop.
         

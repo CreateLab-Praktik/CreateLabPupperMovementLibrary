@@ -17,6 +17,7 @@ def walkTest():
     actionsMessageQueue.put(msg_Backwards(200))
     actionsMessageQueue.put(msg_Wait(200))
     actionsMessageQueue.put(msg_Trot())
+    actionsMessageQueue.put(msg_Wait(50))
 
 
     return actionsMessageQueue
