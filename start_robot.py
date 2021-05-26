@@ -20,7 +20,7 @@ def main():
 
         injectionInterface = MessageInectionInterface(injection_conn)
 
-        actionLoop.actionQueue = Demos.walkTest()
+        actionLoop.actionQueue = Demos.turningTest()
 
         time.sleep(2)
 
@@ -35,7 +35,7 @@ def main():
         time.sleep(1)
                 
         transmission.start()
-        injecter.start()
+        # injecter.start()
 
         # wait until processes finish
         robot.join()

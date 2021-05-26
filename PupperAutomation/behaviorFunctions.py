@@ -122,6 +122,20 @@ def msg_Strafe_Left(ticks = 0):
 
     return actionMessage
 
-## Right and Left turning
-## TODO
+############## Right and Left turning functions
 
+def msg_Turn_Right(ticks = 0):
+    actionMessage = ActionMessage("turn right")
+    actionMessage.y_axis_velocity = -1
+    actionMessage.yaw = 1
+    actionMessage.ticks = ticks
+
+    return actionMessage
+
+def msg_Turn_Left(ticks = 0):
+    actionMessage = ActionMessage("turn left")
+    actionMessage.y_axis_velocity = -1
+    actionMessage.yaw = -1
+    actionMessage.ticks = ticks
+
+    return actionMessage
