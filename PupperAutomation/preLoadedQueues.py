@@ -1,6 +1,45 @@
 from .behaviorFunctions import *
 from queue import Queue
 
+
+def pivotTest():
+    """
+        returns a queue that only activates and then deactivates the robot.
+    """
+    actionsMessageQueue = Queue()
+
+    actionsMessageQueue.put(msg_Activation())
+    actionsMessageQueue.put(msg_Wait(50))
+    actionsMessageQueue.put(msg_Trot())
+    actionsMessageQueue.put(msg_Wait(50))
+    actionsMessageQueue.put(msg_Turn_Left(150))
+    actionsMessageQueue.put(msg_Wait(50))
+    actionsMessageQueue.put(msg_Turn_Right(150))
+    actionsMessageQueue.put(msg_Wait(50))
+    actionsMessageQueue.put(msg_Trot())
+
+    return actionsMessageQueue
+
+def turningTest():
+    """
+        returns a queue that only activates and then deactivates the robot.
+    """
+    actionsMessageQueue = Queue()
+
+    actionsMessageQueue.put(msg_Activation())
+    actionsMessageQueue.put(msg_Wait(20))
+    actionsMessageQueue.put(msg_Trot())
+    actionsMessageQueue.put(msg_Wait(20))
+    actionsMessageQueue.put(msg_Turn_Right(50))
+    actionsMessageQueue.put(msg_Wait(20))
+    actionsMessageQueue.put(msg_Forwards(100))
+    actionsMessageQueue.put(msg_Wait(20))
+    actionsMessageQueue.put(msg_Turn_Left(50))
+
+
+    return actionsMessageQueue
+
+
 def walkTest():
     
     actionsMessageQueue = Queue()
